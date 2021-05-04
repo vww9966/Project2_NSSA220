@@ -2,13 +2,21 @@
 # filter_packets
 # Specs: Filter node packets based off of the type
 
-file="Node1.txt"
-writefile="Node1_ICMP.txt"
-def filter():
+# num - the number of node being analyzed
+def filter(num):
 	print('called filter function in filter_packets.py')
-	readfile(file)
 
-def readfile(filename):
+	# Create the file names for reading and writing
+	file="Node" + str(num) + ".txt"
+	writefile="Node" + str(num) + "_filtered.txt"
+
+	# Call the readfile method to filter the input
+	readfile(file, writefile)
+
+	# Return the name of the filtered file
+	return writefile
+
+def readfile(filename, writefile):
 	f = open(filename)
 	fw = open(writefile, 'a')
 	line = f.readline()
@@ -19,5 +27,3 @@ def readfile(filename):
 	
 	f.close()
 	fw.close()
-
-filter()
