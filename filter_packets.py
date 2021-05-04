@@ -17,13 +17,24 @@ def filter(num):
 	return writefile
 
 def readfile(filename, writefile):
+	# Open the proper file
 	f = open(filename)
-	fw = open(writefile, 'a')
+
+	# Open the writing file
+	fw = open(writefile, 'w')
+
+	# Read in the first line
 	line = f.readline()
+
+	# Loop over every line in the file
 	while line:
-		line = f.readline()
+		# Check if it's an ICMP message
 		if("ICMP" in line):
 			fw.write(line)
-	
+		
+		# Read in the next line
+		line = f.readline()
+
+	# Close the files since we're done with all that
 	f.close()
 	fw.close()

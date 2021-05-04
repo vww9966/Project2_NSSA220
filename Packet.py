@@ -16,9 +16,10 @@ class Packet(object):
     packet_length : str
     seq : str
     ttl : str
+    unreachable : bool
 
 
-    def __init__(self, time, source, dest, packet_type, packet_length, seq, ttl):
+    def __init__(self, time, source, dest, packet_type, packet_length, seq, ttl, unreachable):
         self.time = time
         self.source = source
         self.dest = dest
@@ -26,3 +27,7 @@ class Packet(object):
         self.packet_length = packet_length
         self.seq = seq
         self.ttl = ttl
+        self.unreachable = unreachable
+
+    def to_string(self):
+        print("Time: " + self.time + ", Source: " + self.source + ", Dest: " + self.dest + ", Type: " + self.packet_type + ", Len: " + self.packet_length + ", Seq: " + self.seq + ", Ttl: " + self.ttl + ", Unreachable: " + str(self.unreachable))
