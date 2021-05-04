@@ -2,7 +2,6 @@
 # filter_packets
 # Specs: Filter node packets based off of the type
 
-
 file="Node1.txt"
 writefile="Node1_ICMP.txt"
 def filter():
