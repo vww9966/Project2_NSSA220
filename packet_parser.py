@@ -56,14 +56,39 @@ def parse(filtered_file, num) :
 			# Add the boolean saying it's unreachable
 			data_formatted.append(True)
 
+			# Create a temp Packet object and add it to the parsed_packets list
 			temp_packet_object = Packet(data_formatted[1], data_formatted[2], data_formatted[3], data_formatted[-2], data_formatted[-3], 'none', 'none', data_formatted[-1])
 			parsed_packets.append(temp_packet_object)
+		else:
+			for i in range(1,6):
+				data_formatted.append(line_data[i])
+
+			# Add the type, seq, and ttl
+			temp_type = line_data[8]
+			temp_seq = line_data[10]
+			temp_ttl = line_data[11] + " " + line_data[12] + " " + line_data[13] + " " + line_data[14]
+
+			# Cut out unnecessary info from the seq
+			temp_seq = temp_seq[4:-1]
+
+			# Add this info to the formatted data
+			data_formatted.append(temp_type)
+			data_formatted.append(temp_seq)
+			data_formatted.append(temp_ttl)
+
+			# Add that it's not unreachable
+			data_formatted.append(False)
+
+			# Remove the ICMP item in data_formatted
+			data_formatted.remove("ICMP")
+
+			# Create a temp Packet object and add it to the parsed_packets list
+			temp_packet_object = Packet(data_formatted[0], data_formatted[1], data_formatted[2], data_formatted[4], data_formatted[3], data_formatted[5], data_formatted[6], data_formatted[7])
+			parsed_packets.append(temp_packet_object)
+
 
 		# Read in the next line
 		line = f.readline()
-
-	# outside loop
-
 
 	# return the parsed_packets
 	return parsed_packets
