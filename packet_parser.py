@@ -66,7 +66,10 @@ def parse(filtered_file, num) :
 			# Add the type, seq, and ttl
 			temp_type = line_data[8]
 			temp_seq = line_data[10]
-			temp_ttl = line_data[11] + " " + line_data[12] + " " + line_data[13] + " " + line_data[14]
+			temp_ttl = line_data[11]
+
+			# Cut out the ttl to just the number
+			temp_ttl = temp_ttl[4:]
 
 			# Cut out unnecessary info from the seq
 			end=temp_seq.index('/')
@@ -75,7 +78,6 @@ def parse(filtered_file, num) :
 			# Add this info to the formatted data
 			data_formatted.append(temp_type)
 			data_formatted.append(temp_seq)
-			temp_ttl = temp_ttl[4:7]
 			data_formatted.append(temp_ttl)
 
 			# Add that it's not unreachable
