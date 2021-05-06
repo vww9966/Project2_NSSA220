@@ -5,7 +5,7 @@ from Packet import Packet
 
 # List of numbers from 1 to 4 to loop over
 #loops = list(range(1,5))
-loops = [1]
+loops = [1,2,3,4]
 
 # Resultants list
 results = []

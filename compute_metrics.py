@@ -32,25 +32,26 @@ def compute(parsed_packets,node) :
 	replydelay=0
 	rtttotal=0
 	replydelaytotal=0
+	hopcountsum=0
+	totalpackets=0
 	previous_packet=None
 
 	for packet in parsed_packets:
-		print(packet.to_string())
 
 		#Requests sent/received
 		if 'request' in packet.packet_type:
-			if nodeip[node]==packet.source:
+			if nodeip[node-1]==packet.source:
 				results[0]+=1
 			else:
 				results[1]+=1
 		if 'reply' in packet.packet_type:
-			if nodeip[node]==packet.source:
+			if nodeip[node-1]==packet.source:
 				results[2]+=1
 			else:
 				results[3]+=1
 		
 		#Frame and payload bytes
-		if nodeip[node]==packet.source:
+		if nodeip[node-1]==packet.source:
 			#Frame
 			results[4]+=int(packet.packet_length)
 			#Payload
@@ -61,21 +62,21 @@ def compute(parsed_packets,node) :
 			#Payload
 			results[7]+=(int(packet.packet_length)-20)
 
-		#Ping RTT
-		
-
+		#Ping RTT + Ping reply delay
 		if previous_packet is not None and packet.seq in previous_packet.seq:
-			if packet.source==nodeip[node]:
+			if packet.source==nodeip[node-1]:
 				rttsum+=(float(packet.time)-float(previous_packet.time))
 				rtttotal+=1
 			else:
 				replydelay+=(float(packet.time)-float(previous_packet.time))
 				replydelaytotal+=1
 
-			
-
-
-
+		#Average hops count
+		if packet.ttl != '128':
+			hopcountsum+=3
+		else:
+			hopcountsum+=1
+		totalpackets+=1
 
 		previous_packet=packet
 
@@ -83,13 +84,17 @@ def compute(parsed_packets,node) :
 	results[8]=(rttsum/rtttotal)*1000
 	
 	#Echo request throughput
+	results[9]=float((results[4]/1000)/rttsum)
 
-
+	#Echo request goodput
+	results[10]=float((results[6]/1000)/rttsum)	
 
 	#Reply delay
 	results[11]=(replydelay/replydelaytotal)*1000000
 
-
-
+	#Average number of hops per echo request
+	#print(hopcountsum)
+	#print(totalpackets)
+	results[12]=float(hopcountsum/totalpackets)
 	# return the results
 	return results

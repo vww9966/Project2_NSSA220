@@ -75,6 +75,7 @@ def parse(filtered_file, num) :
 			# Add this info to the formatted data
 			data_formatted.append(temp_type)
 			data_formatted.append(temp_seq)
+			temp_ttl = temp_ttl[4:7]
 			data_formatted.append(temp_ttl)
 
 			# Add that it's not unreachable
