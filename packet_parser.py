@@ -69,7 +69,8 @@ def parse(filtered_file, num) :
 			temp_ttl = line_data[11] + " " + line_data[12] + " " + line_data[13] + " " + line_data[14]
 
 			# Cut out unnecessary info from the seq
-			temp_seq = temp_seq[4:-1]
+			end=temp_seq.index('/')
+			temp_seq = temp_seq[4:end]
 
 			# Add this info to the formatted data
 			data_formatted.append(temp_type)

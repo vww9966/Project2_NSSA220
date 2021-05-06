@@ -21,8 +21,8 @@ for num in loops:
     parsed_packets = parse(filtered_file, num)
 
     # Computing with the parsed_packets
-    results.append(compute(parsed_packets))
+    results.append(compute(parsed_packets,num))
 
-test = Packet("0.00", "192.168.1.1", "192.168.2.1", "reply", "72", "14", "240", False)
-
-print(test.source)
+print(results)
+#test = Packet("0.00", "192.168.1.1", "192.168.2.1", "reply", "72", "14", "240", False)
+#print(test.source)

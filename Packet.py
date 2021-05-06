@@ -30,4 +30,4 @@ class Packet(object):
         self.unreachable = unreachable
 
     def to_string(self):
-        print("Time: " + self.time + ", Source: " + self.source + ", Dest: " + self.dest + ", Type: " + self.packet_type + ", Len: " + self.packet_length + ", Seq: " + self.seq + ", Ttl: " + self.ttl + ", Unreachable: " + str(self.unreachable))
+        return "Time: " + self.time + ", Source: " + self.source + ", Dest: " + self.dest + ", Type: " + self.packet_type + ", Len: " + self.packet_length + ", Seq: " + self.seq + ", Ttl: " + self.ttl + ", Unreachable: " + str(self.unreachable)
