@@ -1,6 +1,6 @@
 from filter_packets import filter
-from packet_parser import *
-from compute_metrics import *
+from packet_parser import parse
+from compute_metrics import compute
 from Packet import Packet
 
 # List of numbers from 1 to 4 to loop over
@@ -24,5 +24,4 @@ for num in loops:
     results.append(compute(parsed_packets,num))
 
 print(results)
-#test = Packet("0.00", "192.168.1.1", "192.168.2.1", "reply", "72", "14", "240", False)
-#print(test.source)
+# Display all results in a csv file based off of saved expected output formatting
