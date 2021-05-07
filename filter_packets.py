@@ -4,8 +4,6 @@
 
 # num - the number of node being analyzed
 def filter(num):
-	print('called filter function in filter_packets.py')
-
 	# Create the file names for reading and writing
 	file="Node" + str(num) + ".txt"
 	writefile="Node" + str(num) + "_filtered.txt"

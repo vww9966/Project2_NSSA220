@@ -7,8 +7,6 @@ from Packet import Packet
 # filtered_file - the name of the filtered packet file
 # num - the number of the node
 def parse(filtered_file, num) :
-	print('called parse function in packet_parser.py')
-
 	# Create a list of parsed packets to return
 	parsed_packets = []
 

@@ -23,8 +23,6 @@ nodeip=["192.168.100.1","192.168.100.2","192.168.200.1","192.168.200.2"]
 
 # parsed_packets - a list of all the parsed packets to be computed
 def compute(parsed_packets,node) :
-	print('called compute function in compute_metrics.py')
-
 	# List of results to be returned
 	results = [0,0,0,0,0,0,0,0,0,0,0,0,0]
 

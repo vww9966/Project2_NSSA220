@@ -3,6 +3,8 @@ from packet_parser import parse
 from compute_metrics import compute
 from Packet import Packet
 
+import csv
+
 # List of numbers from 1 to 4 to loop over
 #loops = list(range(1,5))
 loops = [1,2,3,4]
@@ -11,8 +13,6 @@ loops = [1,2,3,4]
 results = []
 
 for num in loops:
-    print('loop ' + str(num))
-    
     # Get filtered file from the filter method
     filtered_file = filter(num)
 
