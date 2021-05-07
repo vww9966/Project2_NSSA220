@@ -23,41 +23,8 @@ def parse(filtered_file, num) :
 		# Create a new list of proper formatting
 		data_formatted = []
 
-		# if the list length is 10, then it's a destination unreachable
-		# otherwise, it's a normal one
-		if len(line_data) == 10:
-			# Add the already properly formatted data
-			for i in range(0,6):
-				data_formatted.append(line_data[i])
-
-			# Check if it's a request or a reply based off of the source
-			current_node = ""
-
-			# Set the IP based off of the node num (num) variable
-			if num == 1:
-				current_node = "192.168.100.1"
-			elif num == 2:
-				current_node = "192.168.100.2"
-			elif num == 3:
-				current_node = "192.168.200.1"
-			else:
-				current_node = "192.168.200.2"
-
-			# Check to see if the unreachable ping is a request or reply
-			# if the source (data_formatted[2]) does not equal the current_node (Host IP), then it's a reply
-			# else, it's a request
-			if data_formatted[2] != current_node:
-				data_formatted.append("reply")
-			else:
-				data_formatted.append("request")
-
-			# Add the boolean saying it's unreachable
-			data_formatted.append(True)
-
-			# Create a temp Packet object and add it to the parsed_packets list
-			temp_packet_object = Packet(data_formatted[1], data_formatted[2], data_formatted[3], data_formatted[-2], data_formatted[-3], 'none', 'none', data_formatted[-1])
-			parsed_packets.append(temp_packet_object)
-		else:
+		# Check to make sure the packet isn't unreachable (length of 10)
+		if len(line_data) != 10:
 			for i in range(1,6):
 				data_formatted.append(line_data[i])
 
@@ -87,7 +54,6 @@ def parse(filtered_file, num) :
 			# Create a temp Packet object and add it to the parsed_packets list
 			temp_packet_object = Packet(data_formatted[0], data_formatted[1], data_formatted[2], data_formatted[4], data_formatted[3], data_formatted[5], data_formatted[6], data_formatted[7])
 			parsed_packets.append(temp_packet_object)
-
 
 		# Read in the next line
 		line = f.readline()
