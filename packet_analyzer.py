@@ -1,12 +1,21 @@
+# Group: Rick Wallert, Mark Holloway, Vaughn Woerpel
+# packet_analyzer
+# Specs: Runner to analyze all of the packet traffic txt captures
+
+# -------------------------------------------------------------------------------------------------
+# NOTE: We did not do the extra credit, hopefully this line here makes your life a little easier
+# -------------------------------------------------------------------------------------------------
+
+# import all of the proper functions
 from filter_packets import filter
 from packet_parser import parse
 from compute_metrics import compute
 from Packet import Packet
 
+# import the csv class for ease of csv file writing
 import csv
 
 # List of numbers from 1 to 4 to loop over
-#loops = list(range(1,5))
 loops = [1,2,3,4]
 
 # Resultants list
@@ -23,7 +32,6 @@ for num in loops:
     # Computing with the parsed_packets
     results.append(compute(parsed_packets,num))
 
-print(results)
 # Display all results in a csv file based off of saved expected output formatting
 with open('output.csv', 'w', newline='') as file:
     # Create a csv file writer using the csv import
