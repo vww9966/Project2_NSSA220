@@ -10,7 +10,6 @@ def parse(filtered_file, num) :
 	# Create a list of parsed packets to return
 	parsed_packets = []
 
-
 	# Start reading from the file
 	f = open(filtered_file)
 	line = f.readline()
@@ -25,10 +24,11 @@ def parse(filtered_file, num) :
 
 		# Check to make sure the packet isn't unreachable (length of 10)
 		if len(line_data) != 10:
+			# Add the already properly formatted data
 			for i in range(1,6):
 				data_formatted.append(line_data[i])
 
-			# Add the type, seq, and ttl
+			# Store the type, seq, and ttl
 			temp_type = line_data[8]
 			temp_seq = line_data[10]
 			temp_ttl = line_data[11]
@@ -36,7 +36,7 @@ def parse(filtered_file, num) :
 			# Cut out the ttl to just the number
 			temp_ttl = temp_ttl[4:]
 
-			# Cut out unnecessary info from the seq
+			# Cut out unnecessary info from the seq (starting from after the 'sql=' and ending at the '/')
 			end=temp_seq.index('/')
 			temp_seq = temp_seq[4:end]
 
@@ -45,14 +45,11 @@ def parse(filtered_file, num) :
 			data_formatted.append(temp_seq)
 			data_formatted.append(temp_ttl)
 
-			# Add that it's not unreachable
-			data_formatted.append(False)
-
 			# Remove the ICMP item in data_formatted
 			data_formatted.remove("ICMP")
 
 			# Create a temp Packet object and add it to the parsed_packets list
-			temp_packet_object = Packet(data_formatted[0], data_formatted[1], data_formatted[2], data_formatted[4], data_formatted[3], data_formatted[5], data_formatted[6], data_formatted[7])
+			temp_packet_object = Packet(data_formatted[0], data_formatted[1], data_formatted[2], data_formatted[4], data_formatted[3], data_formatted[5], data_formatted[6])
 			parsed_packets.append(temp_packet_object)
 
 		# Read in the next line
