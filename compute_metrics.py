@@ -92,7 +92,7 @@ def compute(parsed_packets,node) :
 	# Calculate Reply delay
 	results[11]=(replydelay/replydelaytotal)*1000000
 	# Calculate Average number of hops per echo request
-	results[12]=float(hopcountsum/packettotal)
+	results[12]=float(hopcountsum/(packettotal-4))
 
 	for i in range(0,len(results)):
 		results[i] = str(round(results[i], 2))

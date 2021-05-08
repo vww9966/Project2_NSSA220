@@ -11,7 +11,7 @@ Average RTT (milliseconds),2.56
 Echo Request Throughput (kB/sec),272.47
 Echo Request Goodput (kB/sec),256.09
 Average Reply Delay (microseconds),55.51
-Average Echo Request Hop Count,1.89
+Average Echo Request Hop Count,1.91
 
 Node 2
 
@@ -26,7 +26,7 @@ Average RTT (milliseconds),2.68
 Echo Request Throughput (kB/sec),241.61
 Echo Request Goodput (kB/sec),225.92
 Average Reply Delay (microseconds),55.65
-Average Echo Request Hop Count,2.19
+Average Echo Request Hop Count,2.21
 
 Node 3
 
@@ -41,7 +41,7 @@ Average RTT (milliseconds),2.78
 Echo Request Throughput (kB/sec),265.2
 Echo Request Goodput (kB/sec),250.09
 Average Reply Delay (microseconds),54.86
-Average Echo Request Hop Count,2.19
+Average Echo Request Hop Count,2.21
 
 Node 4
 
@@ -56,4 +56,4 @@ Average RTT (milliseconds),3.04
 Echo Request Throughput (kB/sec),229.26
 Echo Request Goodput (kB/sec),215.44
 Average Reply Delay (microseconds),53.31
-Average Echo Request Hop Count,2.29
+Average Echo Request Hop Count,2.31
