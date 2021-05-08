@@ -34,7 +34,7 @@ def compute(parsed_packets,node) :
 	rtttotal=0
 	replydelaytotal=0
 	hopcountsum=0
-	totalpackets=0
+	packettotal=0
 	previous_packet=None
 
 	# Loop through every parsed packet object
@@ -52,20 +52,22 @@ def compute(parsed_packets,node) :
 				results[3]+=1
 		
 		# Calculate Frame and payload bytes
-		if nodeip[node-1]==packet.source:
-			# Frame
-			results[4]+=int(packet.packet_length)
-			# Payload
-			results[6]+=(int(packet.packet_length)-20)
-		else:
-			# Frame
-			results[5]+=int(packet.packet_length)
-			# Payload
-			results[7]+=(int(packet.packet_length)-20)
+		#print(nodeip[node-1])
+		if(packet.packet_type=="request"):
+			if nodeip[node-1]==packet.source:
+				# Frame
+				results[4]+=int(packet.packet_length)
+				# Payload
+				results[6]+=(int(packet.packet_length)-42)
+			else:
+				# Frame
+				results[5]+=int(packet.packet_length)
+				# Payload
+				results[7]+=(int(packet.packet_length)-42)
 
 		# Calculate Ping RTT + Ping reply delay
 		if previous_packet is not None and packet.seq in previous_packet.seq:
-			if packet.source==nodeip[node-1]:
+			if packet.source!=nodeip[node-1]:
 				rttsum+=(float(packet.time)-float(previous_packet.time))
 				rtttotal+=1
 			else:
@@ -73,28 +75,27 @@ def compute(parsed_packets,node) :
 				replydelaytotal+=1
 
 		# Calculate Average hops count
-		if packet.ttl != '128':
+		if((packet.source).split('.')[2]!=(packet.dest).split('.')[2]):
 			hopcountsum+=3
 		else:
 			hopcountsum+=1
-		totalpackets+=1
-
+		packettotal+=1
+		
 		previous_packet=packet
 
 	# Calculate Average RTT
 	results[8]=(rttsum/rtttotal)*1000
-	
 	# Calculate Echo request throughput
 	results[9]=float((results[4]/1000)/rttsum)
-
 	# Calculate Echo request goodput
 	results[10]=float((results[6]/1000)/rttsum)	
-
 	# Calculate Reply delay
 	results[11]=(replydelay/replydelaytotal)*1000000
-
 	# Calculate Average number of hops per echo request
-	results[12]=float(hopcountsum/totalpackets)
+	results[12]=float(hopcountsum/packettotal)
+
+	for i in range(0,len(results)):
+		results[i] = str(round(results[i], 2))
 
 	# return this list of results
 	return results
